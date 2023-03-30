@@ -47,10 +47,13 @@ struct HamburgerView: View {
 
 struct Profile: View {
     
-    let d: CGFloat = 50
+    let d: CGFloat = 100
     
     var body: some View {
-        Circle().frame(width: d, height: d).padding()
+        Image(systemName: "person.circle")
+            .frame(width: d, height: d)
+            .scaledToFill()
+            .padding()
     }
 }
 
