@@ -10,7 +10,9 @@ import MapKit
 
 struct MapView: View {
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 38.9897, longitude: -76.9378), span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
-
+    @EnvironmentObject var vm: Unity
+    
+    
     var body: some View {
         
         VStack {
@@ -29,20 +31,51 @@ struct MapView: View {
                     userTrackingMode: .constant(.follow))
                     .frame(width: 400, height: 500)
                 
-                Rectangle()
-                    .opacity(0.3)
-                    .frame(width: 100, height: 150)
-                    .padding(30)
+                
+                if vm.isAuthorized {
+                    Rectangle()
+                        .opacity(0.3)
+                        .frame(width: 100, height: 150)
+                        .overlay(
+                            VStack {
+                                Text("Today's Step Count")
+                                    .font(.title3)
+                                
+                                Text("\(vm.userStepCount)")
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                            }
+                        )
+                        .padding(30)
+                } else {
+                    VStack {
+                        Text("Please Authorize Health!")
+                            .font(.title3)
+                        
+                        Button {
+                            vm.healthRequest()
+                        } label: {
+                            Text("Authorize HealthKit")
+                                .font(.headline)
+                                .foregroundColor(.white)
+                        }
+                        .frame(width: 320, height: 55)
+                        .background(Color(.orange))
+                        .cornerRadius(10)
+                    }
+                }
+                
+                Spacer()
+            }.onAppear {
+                vm.readStepsTakenToday()
             }
             
-            Spacer()
         }
-        
     }
-}
-
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView()
+    
+    struct MapView_Previews: PreviewProvider {
+        static var previews: some View {
+            MapView()
+        }
     }
 }

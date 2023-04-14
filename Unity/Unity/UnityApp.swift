@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct UnityApp: App {
+    var healthVM = Unity()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(healthVM)
         }
     }
 }
