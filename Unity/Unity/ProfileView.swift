@@ -8,32 +8,34 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
+    let gearSize: CGFloat = 40
+    
     var body: some View {
-        VStack {
-            HStack {
+        ZStack(alignment: .topLeading) {
+            
+            VStack {
+                
+                ProfilePicture()
+                ProfileInformation()
+                Gallery()
+                Achievements()
+                
                 Spacer()
-                Button(action: {}) {
-                    Image(systemName: "xmark")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 30, height: 30)
-                        .padding([.trailing, .top], 30)
-                }
             }
             
-            ProfilePicture()
-            ProfileInformation()
-            Gallery()
-            Achievements()
+            Image(systemName: "gearshape")
+                .resizable()
+                .frame(width: gearSize, height: gearSize)
+                .padding([.leading, .top], 30)
             
-            Spacer()
         }
     }
 }
 
 private struct ProfilePicture: View {
     
-    let d: CGFloat = 120
+    let d: CGFloat = 100
     
     var body: some View {
         Image(systemName: "person.circle")
@@ -41,6 +43,7 @@ private struct ProfilePicture: View {
             .scaledToFill()
             .frame(width: d, height: d)
             .padding()
+            .padding(.top, 45)
     }
 }
 
