@@ -9,28 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-//        HeaderView()
         ZStack {
-//            MapView()
-            ProfileView()
             TbView()
         }
         
     }
 }
 struct TbView: View {
-    //@EnvironmentObject var game: Triples
+    
+    @State private var selection = 1
+    private var iconSize: CGFloat = 1000
+    
     var body: some View {
-        TabView {
-            ProfileView().tabItem {
-                Label("pf", systemImage: "gamecontroller")
-            }
+        TabView(selection: $selection) {
+            
+            Group { Text("Camera") }.tabItem {
+                Image(systemName: "camera")
+                    .font(.title)
+            }.tag(1)
+            
             MapView().tabItem {
-                Label("map", systemImage: "list.dash")
-            }
-            /*HeaderView.tabItem {
-                Label("a", systemImage: "info.circle")
-            }*/
+                Image(systemName: "house")
+            }.tag(2)
+            
+            ProfileView().tabItem {
+                Image(systemName: "person.crop.circle")
+            }.tag(3)
+            
+        }.onAppear {
+            selection = 2
         }
     }
 }
