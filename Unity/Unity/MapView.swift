@@ -23,7 +23,10 @@ struct MapView: View {
             
             ZStack (alignment: .bottomLeading) {
                 
-                Map(coordinateRegion: $region, showsUserLocation: true, userTrackingMode: .constant(.follow))
+                Map(
+                    coordinateRegion: $region,
+                    showsUserLocation: true,
+                    userTrackingMode: .constant(.follow))
                     .frame(width: 400, height: 500)
                 
                 Rectangle()
