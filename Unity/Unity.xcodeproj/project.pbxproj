@@ -27,10 +27,10 @@
 		735EC40229D4CAEC00E508DD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		735EC40429D4CB6800E508DD /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		735EC40629D526EF00E508DD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		D1ADF7B029EA00E200676115 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Model.swift; path = ../../../../.Trash/nextbigthing/Unity/Unity/Model.swift; sourceTree = "<group>"; };
+		D1ADF7B029EA00E200676115 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D1ADF7B229EA03C400676115 /* Unity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Unity.entitlements; sourceTree = "<group>"; };
 		D1ADF7B329EA03FA00676115 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		D1ADF7B429EA04E700676115 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HealthKitManager.swift; path = ../../../../.Trash/nextbigthing/Unity/Unity/HealthKitManager.swift; sourceTree = "<group>"; };
+		D1ADF7B429EA04E700676115 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
