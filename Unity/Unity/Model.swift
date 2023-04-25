@@ -7,18 +7,37 @@
 
 import Foundation
 import HealthKit
+import CoreLocation
+import MapKit
 
-class Unity: ObservableObject {
+class Unity: NSObject, ObservableObject {
     // For Step Count
     private var healthStore = HKHealthStore()
     private var healthKitManager = HealthKitManager()
     @Published var userStepCount = ""
     @Published var isAuthorized = false
     
-    init() {
+    // Location
+    private let locationManager = CLLocationManager()
+    /// Contains details of the user's current location
+    @Published var location: CLLocation?
+    /// Describes a region that is centered on the user's location
+    @Published var region = MKCoordinateRegion()
+    
+    override init() {
+        super.init()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        
         changeAuthorizationStatus()
     }
     
+}
+
+/// Health Features
+extension Unity {
     // Authorization Prompt
     func healthRequest() {
         healthKitManager.setUpHealthRequest(healthStore: healthStore) {
@@ -53,5 +72,17 @@ class Unity: ObservableObject {
             }
         }
     }
-    
+}
+
+/// Location Manager Delegate
+extension Unity: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager,
+                         didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        self.location = location
+        self.region = MKCoordinateRegion(
+            center: location.coordinate,
+            span: MKCoordinateSpan(latitudeDelta: 0.003, longitudeDelta: 0.003)
+        )
+    }
 }

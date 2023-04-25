@@ -9,9 +9,9 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 38.9897, longitude: -76.9378), span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
     @EnvironmentObject var vm: Unity
     
+    @State var ustm: MapUserTrackingMode = MapUserTrackingMode.follow
     
     var body: some View {
         
@@ -26,10 +26,11 @@ struct MapView: View {
             ZStack (alignment: .bottomLeading) {
                 
                 Map(
-                    coordinateRegion: $region,
+                    coordinateRegion: $vm.region,
                     showsUserLocation: true,
-                    userTrackingMode: .constant(.follow))
-                    .frame(width: 400, height: 500)
+                    userTrackingMode: $ustm
+                )
+                .frame(width: 400, height: 500)
                 
                 
                 if vm.isAuthorized {
