@@ -24,18 +24,19 @@ struct TbView: View {
     
     var body: some View {
         TabView(selection: $selection) {
-
+            
             Group { Text("Camera") }.tabItem {
-                Image(systemName: "camera")
+                Label("", systemImage: "camera")
                     .font(.title)
+                    .foregroundColor(vm.isDarkMode ? Color.white : Color.gray)
             }.tag(1)
 
-            MapView().environmentObject(vm).tabItem {
-                Image(systemName: "house")
+            MapView().tabItem {
+                Label("", systemImage: "house")
             }.tag(2)
 
             ProfileView().tabItem {
-                Image(systemName: "person.crop.circle")
+                Label("", systemImage: "person.crop.circle")
             }.tag(3)
 
         }.onAppear {

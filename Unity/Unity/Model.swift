@@ -16,6 +16,7 @@ class Unity: NSObject, ObservableObject {
     private var healthKitManager = HealthKitManager()
     @Published var userStepCount = ""
     @Published var isAuthorized = false
+    @Published var isDarkMode = false
     
     // Location
     private let locationManager = CLLocationManager()

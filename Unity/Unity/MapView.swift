@@ -19,6 +19,7 @@ struct MapView: View {
             Text("Unity")
                 .font(.system(size: 48, weight: .bold))
                 .padding(20)
+                .foregroundColor(vm.isDarkMode ? Color.white : Color.black)
             
             Spacer()
             
@@ -41,10 +42,12 @@ struct MapView: View {
                             VStack {
                                 Text("Today's Step Count")
                                     .font(.title3)
+                                    .foregroundColor(vm.isDarkMode ? Color.white : Color.black)
                                 
                                 Text("\(vm.userStepCount)")
                                     .font(.largeTitle)
                                     .fontWeight(.bold)
+                                    .foregroundColor(vm.isDarkMode ? Color.white : Color.black)
                             }
                         )
                         .padding(30)
@@ -52,13 +55,14 @@ struct MapView: View {
                     VStack {
                         Text("Please Authorize Health!")
                             .font(.title3)
+                            .foregroundColor(vm.isDarkMode ? Color.white : Color.black)
                         
                         Button {
                             vm.healthRequest()
                         } label: {
                             Text("Authorize HealthKit")
                                 .font(.headline)
-                                .foregroundColor(.white)
+                                .foregroundColor(vm.isDarkMode ? Color.black : Color.white)
                         }
                         .frame(width: 320, height: 55)
                         .background(Color(.orange))
@@ -70,13 +74,14 @@ struct MapView: View {
             }.onAppear {
                 vm.readStepsTakenToday()
             }
+            Spacer()
             
-        }
+        }.background(vm.isDarkMode ? Color(UIColor(red: 87/255, green: 95/255, blue: 101/255, alpha: 1.0)) : Color.white)
     }
     
     struct MapView_Previews: PreviewProvider {
         static var previews: some View {
-            MapView()
+            MapView().environmentObject(Unity())
         }
     }
 }

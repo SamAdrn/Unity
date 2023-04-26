@@ -8,33 +8,40 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var model: Unity
     
     let gearSize: CGFloat = 40
     
     var body: some View {
-        ZStack(alignment: .topLeading) {
-            
-            VStack {
+        NavigationView {
+            ZStack(alignment: .topLeading) {
                 
-                ProfilePicture()
-                ProfileInformation()
-                Gallery()
-                Achievements()
+                VStack {
+                    
+                    ProfilePicture()
+                    ProfileInformation()
+                    Gallery()
+                    Achievements()
+                    
+                    Spacer()
+                }
                 
-                Spacer()
+                NavigationLink(destination: SettingsView()) {
+                    Image(systemName: "gearshape")
+                        .resizable()
+                        .frame(width: gearSize, height: gearSize)
+                        .padding([.leading, .top], 30)
+                }.foregroundColor(model.isDarkMode ? Color.white : Color.black)
+                
             }
-            
-            Image(systemName: "gearshape")
-                .resizable()
-                .frame(width: gearSize, height: gearSize)
-                .padding([.leading, .top], 30)
-            
+            .background(model.isDarkMode ? Color(UIColor(red: 87/255, green: 95/255, blue: 101/255, alpha: 1.0)) : Color.white)
         }
     }
 }
 
 private struct ProfilePicture: View {
-    
+    @EnvironmentObject var model: Unity
     let d: CGFloat = 100
     
     var body: some View {
@@ -44,6 +51,7 @@ private struct ProfilePicture: View {
             .frame(width: d, height: d)
             .padding()
             .padding(.top, 45)
+            .foregroundColor(model.isDarkMode ? Color.white : Color.black)
     }
 }
 
@@ -52,6 +60,7 @@ private struct ProfileInformation: View {
     @State var name: String = "Samuel Adrian Kosasih"
     @State var steps: Int = 9000
     @State var miles: Int = 500
+    @EnvironmentObject var model: Unity
     
     var body: some View {
         VStack {
@@ -61,17 +70,19 @@ private struct ProfileInformation: View {
                 .multilineTextAlignment(.center)
                 .padding([.leading, .trailing], 30)
                 .padding([.bottom], 1)
+                .foregroundColor(model.isDarkMode ? Color.white : Color.black)
             
             Text("\(steps) Steps (\(miles) miles travelled)")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(1)
+                .foregroundColor(model.isDarkMode ? Color.white : Color.black)
         }
     }
 }
 
 private struct Gallery: View {
-    
+    @EnvironmentObject var model: Unity
     let imageSize: CGFloat, gridSize: CGFloat, plusFrame: CGFloat, plusPadding: CGFloat
     
     init() {
@@ -85,8 +96,9 @@ private struct Gallery: View {
             HStack {
                 Text("Gallery")
                     .font(.headline)
-                    .foregroundColor(.gray)
+                    .foregroundColor(model.isDarkMode ? .white : .gray)
                     .padding(.leading, 10)
+                
                 Spacer()
             }
             
@@ -114,7 +126,7 @@ private struct Gallery: View {
 }
 
 private struct Achievements: View {
-    
+    @EnvironmentObject var model: Unity
     let trophySize: CGFloat = 50
     
     var body: some View {
@@ -122,7 +134,7 @@ private struct Achievements: View {
             HStack {
                 Text("Achievements")
                     .font(.headline)
-                    .foregroundColor(.gray)
+                    .foregroundColor(model.isDarkMode ? .white : .gray)
                     .padding(.leading, 10)
                 Spacer()
             }
@@ -134,6 +146,7 @@ private struct Achievements: View {
                             .resizable()
                             .frame(width: trophySize, height: trophySize)
                             .padding(.horizontal, 10)
+                            .foregroundColor(model.isDarkMode ? Color.white : Color.black)
                     }
                 }
             }
@@ -145,6 +158,6 @@ private struct Achievements: View {
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView().environmentObject(Unity())
     }
 }

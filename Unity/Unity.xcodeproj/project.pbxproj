@@ -14,6 +14,7 @@
 		735EC40329D4CAEC00E508DD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735EC40229D4CAEC00E508DD /* MapView.swift */; };
 		735EC40529D4CB6800E508DD /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735EC40429D4CB6800E508DD /* HeaderView.swift */; };
 		735EC40729D526EF00E508DD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735EC40629D526EF00E508DD /* ProfileView.swift */; };
+		D12F63A229F888D20028427D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12F63A129F888D20028427D /* SettingsView.swift */; };
 		D1ADF7B129EA00E200676115 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ADF7B029EA00E200676115 /* Model.swift */; };
 		D1ADF7B529EA04E700676115 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ADF7B429EA04E700676115 /* HealthKitManager.swift */; };
 /* End PBXBuildFile section */
@@ -27,6 +28,7 @@
 		735EC40229D4CAEC00E508DD /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		735EC40429D4CB6800E508DD /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		735EC40629D526EF00E508DD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D12F63A129F888D20028427D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		D1ADF7B029EA00E200676115 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D1ADF7B229EA03C400676115 /* Unity.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Unity.entitlements; sourceTree = "<group>"; };
 		D1ADF7B329EA03FA00676115 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				D1ADF7B329EA03FA00676115 /* Info.plist */,
 				D1ADF7B229EA03C400676115 /* Unity.entitlements */,
 				735EC3F429D4AB7300E508DD /* UnityApp.swift */,
+				D12F63A129F888D20028427D /* SettingsView.swift */,
 				735EC3F629D4AB7300E508DD /* ContentView.swift */,
 				735EC40229D4CAEC00E508DD /* MapView.swift */,
 				735EC40429D4CB6800E508DD /* HeaderView.swift */,
@@ -157,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				735EC3F729D4AB7300E508DD /* ContentView.swift in Sources */,
+				D12F63A229F888D20028427D /* SettingsView.swift in Sources */,
 				735EC40329D4CAEC00E508DD /* MapView.swift in Sources */,
 				735EC40729D526EF00E508DD /* ProfileView.swift in Sources */,
 				D1ADF7B129EA00E200676115 /* Model.swift in Sources */,
