@@ -84,6 +84,8 @@ extension Unity: CLLocationManagerDelegate {
         self.region = MKCoordinateRegion(
             center: location.coordinate,
             span: MKCoordinateSpan(latitudeDelta: 0.003, longitudeDelta: 0.003)
+            
         )
+        readStepsTakenToday()
     }
 }

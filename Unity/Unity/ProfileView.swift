@@ -45,13 +45,12 @@ private struct ProfilePicture: View {
     let d: CGFloat = 100
     
     var body: some View {
-        Image(systemName: "person.circle")
+        Image("944")
             .resizable()
             .scaledToFill()
             .frame(width: d, height: d)
-            .padding()
-            .padding(.top, 45)
             .foregroundColor(model.isDarkMode ? Color.white : Color.black)
+            .clipShape(Circle()).padding(.top, 45)
     }
 }
 
@@ -71,8 +70,7 @@ private struct ProfileInformation: View {
                 .padding([.leading, .trailing], 30)
                 .padding([.bottom], 1)
                 .foregroundColor(model.isDarkMode ? Color.white : Color.black)
-            
-            Text("\(steps) Steps (\(miles) miles travelled)")
+            Text("\(model.userStepCount) Steps (\(String(format: "%.1f", (Double(model.userStepCount) ?? 0)/2000)) miles travelled)")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(1)
@@ -105,16 +103,16 @@ private struct Gallery: View {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: gridSize))]) {
                     ForEach(1..<10) { i in
-                        Image("rx7")
+                        Image("blur")
                             .resizable()
                             .frame(width: imageSize, height: imageSize)
                     }
-                    Image(systemName: "plus")
+                    /*Image(systemName: "plus")
                         .resizable()
                         .frame(width: plusFrame, height: plusFrame)
                         .padding(plusPadding)
                         .foregroundColor(.gray)
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))*/
                 }
             }
             
@@ -141,6 +139,11 @@ private struct Achievements: View {
             
             ScrollView(.horizontal) {
                 HStack {
+                    Image("10kSteps")
+                    .resizable()
+                    .frame(width: trophySize, height: trophySize)
+                    .foregroundColor(model.isDarkMode ? Color.white : Color.black)
+                    .clipShape(Circle())//.padding(.horizontal, 10)
                     ForEach(0..<10) { i in
                         Image(systemName: "trophy.circle")
                             .resizable()
