@@ -16,41 +16,46 @@ struct MapView: View {
     var body: some View {
         
         VStack {
-            Text("Unity")
-                .font(.system(size: 48, weight: .bold))
-                .padding(20)
-                .foregroundColor(vm.isDarkMode ? Color.white : Color.black)
-            
-            Spacer()
-            
-            
-            ZStack (alignment: .bottomLeading) {
-                
+            ZStack {
                 Map(
                     coordinateRegion: $vm.region,
                     showsUserLocation: true,
                     userTrackingMode: $ustm
                 )
-                .frame(width: 400, height: 500)
-                
+                .frame(width: 400, height: 780)
+                .padding(.bottom, 90)
+                .overlay(
+                    Text("Unity")
+                        .font(.system(size: 48, weight: .bold))
+                        .padding(20)
+                        .foregroundColor(Color.black)
+                        .offset(x: 0, y: -325)
+                )
                 
                 if vm.isAuthorized {
-                    Rectangle()
-                        .opacity(0.3)
-                        .frame(width: 100, height: 150)
-                        .overlay(
-                            VStack {
-                                Text("Today's Step Count")
-                                    .font(.title3)
-                                    .foregroundColor(vm.isDarkMode ? Color.white : Color.black)
-                                
-                                Text("\(vm.userStepCount)")
-                                    .font(.largeTitle)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(vm.isDarkMode ? Color.white : Color.black)
-                            }
-                        )
-                        .padding(30)
+                    ZStack {
+                        Rectangle()
+                            .frame(width: 100, height: 125)
+                            .foregroundColor(vm.isDarkMode ? Color.white : Color.black)
+                            .opacity(0.4)
+                            .offset(x: -135, y: 250)
+                        VStack {
+                            Text("Step Count:")
+                                .font(.system(size: 20))
+                                .bold()
+                                .foregroundColor(vm.isDarkMode ? Color.black : Color.white)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.bottom, 5)
+                            
+                            Text("\(vm.userStepCount)")
+                                .font(.system(size: 23))
+                                .fontWeight(.bold)
+                                .foregroundColor(vm.isDarkMode ? Color.black : Color.white)
+                        }
+                        .frame(width: 75, height: 180)
+                        .padding(50)
+                        .offset(x: -145, y: 240)
+                    }
                 } else {
                     VStack {
                         Text("Please Authorize Health!")
@@ -75,6 +80,7 @@ struct MapView: View {
                 vm.readStepsTakenToday()
             }
             Spacer()
+            
             
         }.background(vm.isDarkMode ? Color(UIColor(red: 87/255, green: 95/255, blue: 101/255, alpha: 1.0)) : Color.white)
     }
