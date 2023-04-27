@@ -36,6 +36,11 @@ class Unity: NSObject, ObservableObject {
         self.locationManager.startUpdatingLocation()
         
         changeAuthorizationStatus()
+
+        addItemsToUserDefaults()
+        
+        print(retrieveStoreItems())
+        print("DONE")
     }
     
 }
@@ -90,5 +95,60 @@ extension Unity: CLLocationManagerDelegate {
             
         )
         readStepsTakenToday()
+    }
+}
+
+/// Store Features
+
+public struct StoreItem: Codable, Identifiable {
+    
+    public var id: UUID { UUID() }
+    var symbol: String
+    var name: String
+    var price: Int
+    // Purchased is a Boolean Integer, b/c boolean does not conform to Codable
+    var purchased: Int
+    
+}
+
+extension Unity {
+    
+    private func addItemsToUserDefaults() {
+        let items = [
+            StoreItem(symbol: "hare.fill", name: "Bunny", price: 100, purchased: 0),
+            StoreItem(symbol: "figure.run.square.stack.fill", name: "Pro Runner", price: 200, purchased: 0),
+            StoreItem(symbol: "figure.run", name: "Runner", price: 100, purchased: 0),
+            StoreItem(symbol: "moon.circle.fill", name: "Moon Walker", price: 100, purchased: 0),
+            StoreItem(symbol: "sun.and.horizon.circle.fill", name: "Early Walker", price: 100, purchased: 0),
+            StoreItem(symbol: "figure.walk", name: "Walker", price: 100, purchased: 0),
+            StoreItem(symbol: "bicycle", name: "Biker", price: 100, purchased: 0),
+            StoreItem(symbol: "figure.pool.swim", name: "Swimmer", price: 100, purchased: 0),
+            StoreItem(symbol: "flag.checkered.2.crossed", name: "Racer", price: 100, purchased: 0),
+            StoreItem(symbol: "gamecontroller.fill", name: "Gamer", price: 100, purchased: 0),
+            StoreItem(symbol: "figure.flexibility", name: "Flexible", price: 100, purchased: 0)
+        ]
+        
+        try? UserDefaults.standard.setCodable(items, forKey: "StoreItems")
+    }
+    
+    func retrieveStoreItems() -> [StoreItem] {
+        if let storeItems = UserDefaults.standard.getCodable([StoreItem].self, forKey: "StoreItems") {
+            return storeItems
+        }
+        return []
+    }
+}
+
+public extension UserDefaults {
+    func setCodable<T: Codable>(_ object: T, forKey: String) throws {
+        let jsonData: Data = try JSONEncoder().encode(object)
+        set(jsonData, forKey: forKey)
+    }
+    
+    func getCodable<T: Codable>(_ oriType: T.Type, forKey: String) -> T? {
+        guard let result = value(forKey: forKey) as? Data else {
+            return nil
+        }
+        return try? JSONDecoder().decode(oriType, from: result)
     }
 }

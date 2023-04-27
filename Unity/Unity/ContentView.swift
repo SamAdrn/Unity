@@ -25,8 +25,8 @@ struct TbView: View {
     var body: some View {
         TabView(selection: $selection) {
             
-            Group { Text("Camera") }.tabItem {
-                Label("", systemImage: "camera")
+            StoreView().tabItem {
+                Label("", systemImage: "bag.fill")
                     .font(.title)
                     .foregroundColor(vm.isDarkMode ? Color.white : Color.gray)
             }.tag(1)
