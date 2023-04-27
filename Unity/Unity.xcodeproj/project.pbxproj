@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		733C287829FB237300B803FA /* StoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733C287729FB237300B803FA /* StoreView.swift */; };
 		735EC3F529D4AB7300E508DD /* UnityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735EC3F429D4AB7300E508DD /* UnityApp.swift */; };
 		735EC3F729D4AB7300E508DD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735EC3F629D4AB7300E508DD /* ContentView.swift */; };
 		735EC3F929D4AB7500E508DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 735EC3F829D4AB7500E508DD /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		733C287729FB237300B803FA /* StoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreView.swift; sourceTree = "<group>"; };
 		735EC3F129D4AB7300E508DD /* Unity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		735EC3F429D4AB7300E508DD /* UnityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnityApp.swift; sourceTree = "<group>"; };
 		735EC3F629D4AB7300E508DD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,8 +72,8 @@
 				D1ADF7B329EA03FA00676115 /* Info.plist */,
 				D1ADF7B229EA03C400676115 /* Unity.entitlements */,
 				735EC3F429D4AB7300E508DD /* UnityApp.swift */,
-				D12F63A129F888D20028427D /* SettingsView.swift */,
 				735EC3F629D4AB7300E508DD /* ContentView.swift */,
+				D12F63A129F888D20028427D /* SettingsView.swift */,
 				735EC40229D4CAEC00E508DD /* MapView.swift */,
 				735EC40429D4CB6800E508DD /* HeaderView.swift */,
 				735EC3F829D4AB7500E508DD /* Assets.xcassets */,
@@ -80,6 +82,7 @@
 				D1ADF7B029EA00E200676115 /* Model.swift */,
 				D1ADF7B429EA04E700676115 /* HealthKitManager.swift */,
 				9807F56129FB1C8700F3B53C /* NotificationManager.swift */,
+				733C287729FB237300B803FA /* StoreView.swift */,
 			);
 			path = Unity;
 			sourceTree = "<group>";
@@ -170,6 +173,7 @@
 				D1ADF7B129EA00E200676115 /* Model.swift in Sources */,
 				735EC3F529D4AB7300E508DD /* UnityApp.swift in Sources */,
 				D1ADF7B529EA04E700676115 /* HealthKitManager.swift in Sources */,
+				733C287829FB237300B803FA /* StoreView.swift in Sources */,
 				735EC40529D4CB6800E508DD /* HeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
