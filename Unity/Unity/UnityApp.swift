@@ -10,10 +10,15 @@ import SwiftUI
 @main
 struct UnityApp: App {
     var healthVM = Unity()
-
+    let notificationManager = NotificationManager()
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(healthVM)
+            ContentView()
+                .environmentObject(healthVM)
+                .onAppear() {
+                    notificationManager.requestAuthorization()
+                    notificationManager.scheduleDailyNotification()
+                }
         }
     }
 }
