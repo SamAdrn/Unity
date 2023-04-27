@@ -10,20 +10,14 @@ import SwiftUI
 struct SettingsView: View {
     @EnvironmentObject var model: Unity
     @Environment(\.presentationMode) var presentationMode
-    
+
     
     var body: some View {
         VStack {
-            //            HStack {
-            //
-            //                Spacer()
-            //            }.padding(.bottom, 25)
-            //
             VStack(alignment: .leading) {
                 HStack(spacing: 175) {
                     Text("Dark Mode")
                         .font(.system(size: 20))
-                    //                    Spacer()
                     Toggle("", isOn: $model.isDarkMode)
                         .labelsHidden()
                 }
@@ -31,20 +25,32 @@ struct SettingsView: View {
                     .frame(width: 330, height: 2)
                     .background(model.isDarkMode ? Color.white : Color.black)
                     .padding(.bottom, 10)
+                
                 Text("Avatar Store")
                     .font(.system(size: 20))
                 Divider()
                     .frame(width: 330, height: 2)
                     .background(model.isDarkMode ? Color.white : Color.black)
                     .padding(.bottom, 10)
-                Text("About Us")
-                    .font(.system(size: 20))
+                
+                NavigationLink (
+                    destination: AboutUsView(),
+                    isActive: $model.isShowingAboutUs,
+                    label: {
+                        Text("About Us")
+                            .font(.system(size: 20))
+                    })
                 Divider()
                     .frame(width: 330, height: 2)
                     .background(model.isDarkMode ? Color.white : Color.black)
                     .padding(.bottom, 10)
-                Text("Contact")
-                    .font(.system(size: 20))
+                NavigationLink (
+                    destination: ContactView(),
+                    isActive: $model.isShowingContact,
+                    label: {
+                        Text("Contact")
+                            .font(.system(size: 20))
+                    })
             }.foregroundColor(model.isDarkMode ? Color.white : Color.black)
             
             

@@ -17,6 +17,9 @@ class Unity: NSObject, ObservableObject {
     @Published var userStepCount = ""
     @Published var isAuthorized = false
     @Published var isDarkMode = false
+    @Published var isShowingAvatarStore = false
+    @Published var isShowingAboutUs = false
+    @Published var isShowingContact = false
     
     // Location
     private let locationManager = CLLocationManager()
