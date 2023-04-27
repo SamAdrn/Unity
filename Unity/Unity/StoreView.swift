@@ -15,10 +15,11 @@ struct StoreView: View {
         VStack {
             
             Text("Store").font(.title).padding(.top, 20)
+                .foregroundColor(model.isDarkMode ? Color.white : Color.black)
             
             StoreGallery(items: model.retrieveStoreItems()).environmentObject(model)
             
-        }
+        }.background(model.isDarkMode ? Color(UIColor(red: 87/255, green: 95/255, blue: 101/255, alpha: 1.0)) : Color.white)
     }
 }
 
@@ -48,7 +49,7 @@ struct StoreGallery: View {
 }
 
 struct ItemView: View {
-    
+    @EnvironmentObject var model: Unity
     var item: StoreItem
     var symbolSize: CGFloat = 70
     
@@ -63,18 +64,21 @@ struct ItemView: View {
                     .frame(width: symbolSize)
                     .padding(4)
                     .padding(.bottom, 8)
+                    .foregroundColor(model.isDarkMode ? Color.white : Color.black)
+
                 Text(item.name).font(.headline)
                     .padding(.vertical, 3)
+                    .foregroundColor(model.isDarkMode ? Color.white : Color.black)
+
                 Text("$\(item.price)").font(.caption)
+                    .foregroundColor(model.isDarkMode ? Color.white : Color.black)
+
             }
             .frame(minWidth: 160, minHeight: 190)
             .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.black, lineWidth: 2)
+                    .stroke(model.isDarkMode ? Color.white : Color.black, lineWidth: 2)
             )
-            
-            
-            
             
         }
         
