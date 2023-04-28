@@ -25,9 +25,12 @@ struct SettingsView: View {
                     .frame(width: 330, height: 2)
                     .background(model.isDarkMode ? Color.white : Color.black)
                     .padding(.bottom, 10)
-                
-                Text("Avatar Store")
-                    .font(.system(size: 20))
+                NavigationLink (
+                    destination: StoreView(),
+                    label: {
+                        Text("Avatar Store")
+                            .font(.system(size: 20))
+                    })
                 Divider()
                     .frame(width: 330, height: 2)
                     .background(model.isDarkMode ? Color.white : Color.black)
