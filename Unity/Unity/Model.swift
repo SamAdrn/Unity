@@ -14,6 +14,7 @@ class Unity: NSObject, ObservableObject {
     // For Step Count
     private var healthStore = HKHealthStore()
     private var healthKitManager = HealthKitManager()
+    @Published var show10kBadge = false
     @Published var userStepCount = 0
     @Published var isAuthorized = false
     @Published var isDarkMode = false
@@ -87,6 +88,9 @@ extension Unity {
         } else {
             self.userStepCount += 1
             UserDefaults.standard.set(self.userStepCount, forKey: "userStepCount")
+            if (userStepCount >= 10000) {
+                show10kBadge.toggle()
+            }
         }
     }
 }

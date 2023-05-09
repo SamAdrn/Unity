@@ -51,8 +51,7 @@ struct MapView: View {
                                 .font(.system(size: 23))
                                 .fontWeight(.bold)
                                 .foregroundColor(vm.isDarkMode ? Color.black : Color.white)
-                        }
-                        .frame(width: 75, height: 180)
+                        }.frame(width: 75, height: 180)
                         .padding(50)
                         .offset(x: -145, y: 240)
                     }

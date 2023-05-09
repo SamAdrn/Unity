@@ -56,14 +56,17 @@ private struct ProfilePicture: View {
 
 private struct ProfileInformation: View {
     
-    @State var name: String = "Samuel Adrian Kosasih"
+    @State var name: String = ""
     @State var steps: Int = 9000
     @State var miles: Int = 500
     @EnvironmentObject var model: Unity
     
     var body: some View {
         VStack {
-            Text(name)
+            ZStack {
+                Text(name)
+                TextField("Enter your name", text: $name)
+            }
                 .font(.title)
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
@@ -139,11 +142,13 @@ private struct Achievements: View {
             
             ScrollView(.horizontal) {
                 HStack {
-                    Image("10kSteps")
-                    .resizable()
-                    .frame(width: trophySize, height: trophySize)
-                    .foregroundColor(model.isDarkMode ? Color.white : Color.black)
-                    .clipShape(Circle())//.padding(.horizontal, 10)
+                    if model.show10kBadge {
+                        Image("10kSteps")
+                            .resizable()
+                            .frame(width: trophySize, height: trophySize)
+                            .foregroundColor(model.isDarkMode ? Color.white : Color.black)
+                            .clipShape(Circle())//.padding(.horizontal, 10)
+                    }
                     ForEach(0..<10) { i in
                         Image(systemName: "trophy.circle")
                             .resizable()
