@@ -14,7 +14,7 @@ class Unity: NSObject, ObservableObject {
     // For Step Count
     private var healthStore = HKHealthStore()
     private var healthKitManager = HealthKitManager()
-    @Published var userStepCount = ""
+    @Published var userStepCount = 0
     @Published var isAuthorized = false
     @Published var isDarkMode = false
     @Published var isShowingAvatarStore = false
@@ -73,12 +73,20 @@ extension Unity {
     
     // Get step count
     func readStepsTakenToday() {
-        healthKitManager.readStepCount(forToday: Date(), healthStore: healthStore) { step in
-            if step != 0.0 {
-                DispatchQueue.main.async {
-                    self.userStepCount = String(format: "%.0f", step)
+        if self.userStepCount == 0 {
+            let s = UserDefaults.standard.integer(forKey: "userStepCount")
+            if  s == 0 {
+                healthKitManager.readStepCount(forToday: Date(), healthStore: healthStore) { step in
+                    self.userStepCount = Int(step)
+                    UserDefaults.standard.set(self.userStepCount, forKey: "userStepCount")
                 }
+            } else {
+                self.userStepCount = s
+                UserDefaults.standard.set(s, forKey: "userStepCount")
             }
+        } else {
+            self.userStepCount += 1
+            UserDefaults.standard.set(self.userStepCount, forKey: "userStepCount")
         }
     }
 }
@@ -92,8 +100,8 @@ extension Unity: CLLocationManagerDelegate {
         self.region = MKCoordinateRegion(
             center: location.coordinate,
             span: MKCoordinateSpan(latitudeDelta: 0.003, longitudeDelta: 0.003)
-            
         )
+        
         readStepsTakenToday()
     }
 }
