@@ -15,12 +15,15 @@ class Unity: NSObject, ObservableObject {
     private var healthStore = HKHealthStore()
     private var healthKitManager = HealthKitManager()
     @Published var show10kBadge = false
+    @Published var show20kBadge = false
+    @Published var show30kBadge = false
     @Published var userStepCount = 0
     @Published var isAuthorized = false
     @Published var isDarkMode = false
     @Published var isShowingAvatarStore = false
     @Published var isShowingAboutUs = false
     @Published var isShowingContact = false
+    @Published var items = [StoreItem]()
     
     // Location
     private let locationManager = CLLocationManager()
@@ -35,13 +38,10 @@ class Unity: NSObject, ObservableObject {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+//        addItemsToUserDefaults()
+        self.items = retrieveStoreItems()
         
         changeAuthorizationStatus()
-
-        addItemsToUserDefaults()
-        
-        print(retrieveStoreItems())
-        print("DONE")
     }
     
 }
@@ -75,22 +75,34 @@ extension Unity {
     // Get step count
     func readStepsTakenToday() {
         if self.userStepCount == 0 {
-            let s = UserDefaults.standard.integer(forKey: "userStepCount")
-            if  s == 0 {
-                healthKitManager.readStepCount(forToday: Date(), healthStore: healthStore) { step in
-                    self.userStepCount = Int(step)
-                    UserDefaults.standard.set(self.userStepCount, forKey: "userStepCount")
-                }
+            var hkSteps = 0
+            healthKitManager.readStepCount(forToday: Date(), healthStore: healthStore) { step in
+                hkSteps = Int(step)
+            }
+            var udSteps = UserDefaults.standard.integer(forKey: "userStepCount")
+            
+            if udSteps > hkSteps {
+                self.userStepCount = udSteps
+                
             } else {
-                self.userStepCount = s
-                UserDefaults.standard.set(s, forKey: "userStepCount")
+                self.userStepCount = hkSteps
             }
-        } else {
-            self.userStepCount += 1
             UserDefaults.standard.set(self.userStepCount, forKey: "userStepCount")
-            if (userStepCount >= 10000) {
-                show10kBadge.toggle()
-            }
+        }
+        
+        self.userStepCount += 1
+        UserDefaults.standard.set(self.userStepCount, forKey: "userStepCount")
+        
+        if (self.userStepCount >= 10000) {
+            show10kBadge = true
+        }
+        
+        if (self.userStepCount >= 20000) {
+            show20kBadge = true
+        }
+        
+        if (self.userStepCount >= 30000) {
+            show30kBadge = true
         }
     }
 }
@@ -148,6 +160,17 @@ extension Unity {
             return storeItems
         }
         return []
+    }
+    
+    func purchaseItem(name: String) {
+        for var i in self.items {
+            if i.name == name {
+                i.purchased = 1
+                break
+            }
+        }
+        try? UserDefaults.standard.setCodable(self.items, forKey: "StoreItems")
+        self.items = retrieveStoreItems()
     }
 }
 

@@ -143,18 +143,40 @@ private struct Achievements: View {
             ScrollView(.horizontal) {
                 HStack {
                     if model.show10kBadge {
-                        Image("10kSteps")
-                            .resizable()
-                            .frame(width: trophySize, height: trophySize)
-                            .foregroundColor(model.isDarkMode ? Color.white : Color.black)
-                            .clipShape(Circle())//.padding(.horizontal, 10)
+                        VStack {
+                            Image(systemName: "figure.run")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: trophySize)
+                                .foregroundColor(.brown)
+                            Text("10k")
+                                .font(.callout)
+                                .foregroundColor(.black)
+                        }
                     }
-                    ForEach(0..<10) { i in
-                        Image(systemName: "trophy.circle")
-                            .resizable()
-                            .frame(width: trophySize, height: trophySize)
-                            .padding(.horizontal, 10)
-                            .foregroundColor(model.isDarkMode ? Color.white : Color.black)
+                    if model.show20kBadge {
+                        VStack {
+                            Image(systemName: "figure.run.circle")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: trophySize)
+                                .foregroundColor(.gray)
+                            Text("20k")
+                                .font(.callout)
+                                .foregroundColor(.black)
+                        }
+                    }
+                    if model.show30kBadge {
+                        VStack {
+                            Image(systemName: "figure.run.circle.fill")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: trophySize)
+                                .foregroundColor(.brown)
+                            Text("30k")
+                                .font(.callout)
+                                .foregroundColor(.black)
+                        }
                     }
                 }
             }

@@ -48,7 +48,7 @@ struct MapView: View {
                                 .padding(.bottom, 5)
                             
                             Text("\(vm.userStepCount)")
-                                .font(.system(size: 23))
+                                .font(.system(size: 20))
                                 .fontWeight(.bold)
                                 .foregroundColor(vm.isDarkMode ? Color.black : Color.white)
                         }.frame(width: 75, height: 180)
