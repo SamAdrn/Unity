@@ -24,6 +24,8 @@ class Unity: NSObject, ObservableObject {
     @Published var isShowingAboutUs = false
     @Published var isShowingContact = false
     @Published var items = [StoreItem]()
+    @Published var purchasedItems = [""]
+    
     
     // Location
     private let locationManager = CLLocationManager()

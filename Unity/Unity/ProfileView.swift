@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var model: Unity
+    @State var update = false
     
     let gearSize: CGFloat = 40
     
@@ -84,6 +85,7 @@ private struct ProfileInformation: View {
 
 private struct Gallery: View {
     @EnvironmentObject var model: Unity
+    @State var update = false
     let imageSize: CGFloat, gridSize: CGFloat, plusFrame: CGFloat, plusPadding: CGFloat
     
     init() {
@@ -105,10 +107,11 @@ private struct Gallery: View {
             
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: gridSize))]) {
-                    ForEach(1..<10) { i in
-                        Image("blur")
-                            .resizable()
-                            .frame(width: imageSize, height: imageSize)
+                    ForEach(1..<model.purchasedItems.count) { i in
+                        Image(systemName: model.purchasedItems[i])
+                        .resizable()
+                        .frame(width: imageSize, height: imageSize)
+                 
                     }
                     /*Image(systemName: "plus")
                         .resizable()
@@ -119,8 +122,9 @@ private struct Gallery: View {
                 }
             }
             
-        }
-        .frame(height: 270)
+        }.onChange(of: model.purchasedItems) { _ in
+            update.toggle()
+        }.frame(height: 270)
         .padding(.horizontal, 30)
         .padding(.top, 30)
     }

@@ -68,10 +68,12 @@ struct ItemView: View {
         Group {
             
             Button {
-                if !self.purchased && model.userStepCount > item.price {
+                if !self.purchased && model.userStepCount >= item.price {
                     model.userStepCount -= item.price
                     self.purchased = true
                     model.purchaseItem(name: item.name)
+                    model.purchasedItems.append(item.symbol)
+                    print(model.purchasedItems)
                 }
             } label: {
                 VStack {
