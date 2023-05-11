@@ -73,7 +73,6 @@ struct ItemView: View {
                     self.purchased = true
                     model.purchaseItem(name: item.name)
                     model.purchasedItems.append(item.symbol)
-                    print(model.purchasedItems)
                 }
             } label: {
                 VStack {

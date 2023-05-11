@@ -51,7 +51,7 @@ private struct ProfilePicture: View {
             .scaledToFill()
             .frame(width: d, height: d)
             .foregroundColor(model.isDarkMode ? Color.white : Color.black)
-            .clipShape(Circle()).padding(.top, 45)
+            .clipShape(Circle()).padding(.top, 45).padding(.bottom, 10)
     }
 }
 
@@ -74,7 +74,7 @@ private struct ProfileInformation: View {
                 .padding([.leading, .trailing], 30)
                 .padding([.bottom], 1)
                 .foregroundColor(model.isDarkMode ? Color.white : Color.black)
-            Text("\(model.userStepCount) Steps (\(String(format: "%.1f", (Double(model.userStepCount) ?? 0)/2000)) miles travelled)")
+            Text("\(model.userStepCount) Steps (\(String(format: "%.1f", (Double(model.userStepCount))/2000)) miles travelled)")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(1)
@@ -86,12 +86,10 @@ private struct ProfileInformation: View {
 private struct Gallery: View {
     @EnvironmentObject var model: Unity
     @State var update = false
-    let imageSize: CGFloat, gridSize: CGFloat, plusFrame: CGFloat, plusPadding: CGFloat
+    let imageSize: CGFloat, gridSize: CGFloat
     
     init() {
-        self.imageSize = 100; self.gridSize = self.imageSize - 20;
-        self.plusFrame = self.gridSize / 2
-        self.plusPadding = (self.imageSize - self.plusFrame) / 2
+        self.imageSize = 70; self.gridSize = self.imageSize;
     }
     
     var body: some View {
@@ -107,20 +105,15 @@ private struct Gallery: View {
             
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: gridSize))]) {
-                    ForEach(1..<model.purchasedItems.count) { i in
+                    ForEach(1..<model.purchasedItems.count, id: \.self) { i in
                         Image(systemName: model.purchasedItems[i])
                         .resizable()
+                        .aspectRatio(contentMode: .fit)
                         .frame(width: imageSize, height: imageSize)
-                 
                     }
-                    /*Image(systemName: "plus")
-                        .resizable()
-                        .frame(width: plusFrame, height: plusFrame)
-                        .padding(plusPadding)
-                        .foregroundColor(.gray)
-                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(.gray, lineWidth: 1))*/
                 }
             }
+            .padding(.top)
             
         }.onChange(of: model.purchasedItems) { _ in
             update.toggle()
@@ -151,36 +144,36 @@ private struct Achievements: View {
                             Image(systemName: "figure.run")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: trophySize)
+                                .frame(height: trophySize)
                                 .foregroundColor(.brown)
                             Text("10k")
                                 .font(.callout)
                                 .foregroundColor(.black)
-                        }
+                        }.padding()
                     }
                     if model.show20kBadge {
                         VStack {
                             Image(systemName: "figure.run.circle")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: trophySize)
+                                .frame(height: trophySize)
                                 .foregroundColor(.gray)
                             Text("20k")
                                 .font(.callout)
                                 .foregroundColor(.black)
-                        }
+                        }.padding()
                     }
                     if model.show30kBadge {
                         VStack {
                             Image(systemName: "figure.run.circle.fill")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: trophySize)
-                                .foregroundColor(.brown)
+                                .frame(height: trophySize)
+                                .foregroundColor(.yellow)
                             Text("30k")
                                 .font(.callout)
                                 .foregroundColor(.black)
-                        }
+                        }.padding()
                     }
                 }
             }
